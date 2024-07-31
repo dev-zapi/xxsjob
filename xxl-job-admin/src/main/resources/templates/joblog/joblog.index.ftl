@@ -15,15 +15,15 @@
 	<@netCommon.commonHeader />
 	<!-- left -->
 	<@netCommon.commonLeft "joblog" />
-	
+
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>${I18n.joblog_name}</h1>
 		</section>
-		
-		<!-- Main content -->
+
+        <!-- Main content -->
 	    <section class="content">
 	    	<div class="row">
 	    		<div class="col-xs-2">
@@ -77,8 +77,8 @@
                     <button class="btn btn-block btn-default" id="clearLog">${I18n.joblog_clean}</button>
 	            </div>
           	</div>
-			
-			<div class="row">
+
+            <div class="row">
 				<div class="col-xs-12">
 					<div class="box">
 			            <#--<div class="box-header hide"><h3 class="box-title">调度日志</h3></div>-->
@@ -88,6 +88,8 @@
 					            	<tr>
                                         <th name="jobId" >${I18n.jobinfo_field_id}</th>
                                         <th name="jobGroup" >jobGroup</th>
+                                        <th name="groupTitle">${I18n.joblog_field_groupTitle}</th>
+                                        <th name="jobDesc">${I18n.joblog_field_jobDesc}</th>
 										<#--<th name="executorAddress" >执行器地址</th>
 										<th name="glueType" >运行模式</th>
                                       	<th name="executorParam" >任务参数</th>-->
@@ -108,8 +110,8 @@
 			</div>
 	    </section>
 	</div>
-	
-	<!-- footer -->
+
+    <!-- footer -->
 	<@netCommon.commonFooter />
 </div>
 

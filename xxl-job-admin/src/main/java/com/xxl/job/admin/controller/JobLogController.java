@@ -1,5 +1,6 @@
 package com.xxl.job.admin.controller;
 
+import com.xxl.job.admin.controller.bean.XxlJobLogView;
 import com.xxl.job.admin.core.complete.XxlJobCompleter;
 import com.xxl.job.admin.core.exception.XxlJobException;
 import com.xxl.job.admin.core.model.XxlJobGroup;
@@ -28,10 +29,8 @@ import org.springframework.web.util.HtmlUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * index controller
@@ -40,7 +39,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/joblog")
 public class JobLogController {
-	private static Logger logger = LoggerFactory.getLogger(JobLogController.class);
+	private static final Logger logger = LoggerFactory.getLogger(JobLogController.class);
 
 	@Resource
 	private XxlJobGroupDao xxlJobGroupDao;
@@ -85,7 +84,7 @@ public class JobLogController {
 		List<XxlJobInfo> list = xxlJobInfoDao.getJobsByGroup(jobGroup);
 		return new ReturnT<List<XxlJobInfo>>(list);
 	}
-	
+
 	@RequestMapping("/pageList")
 	@ResponseBody
 	public Map<String, Object> pageList(HttpServletRequest request,
@@ -95,7 +94,7 @@ public class JobLogController {
 
 		// valid permission
 		JobInfoController.validPermission(request, jobGroup);	// 仅管理员支持查询全部；普通用户仅支持查询有权限的 jobGroup
-		
+
 		// parse param
 		Date triggerTimeStart = null;
 		Date triggerTimeEnd = null;
@@ -106,16 +105,28 @@ public class JobLogController {
 				triggerTimeEnd = DateUtil.parseDateTime(temp[1]);
 			}
 		}
-		
+
 		// page query
 		List<XxlJobLog> list = xxlJobLogDao.pageList(start, length, jobGroup, jobId, triggerTimeStart, triggerTimeEnd, logStatus);
 		int list_count = xxlJobLogDao.pageListCount(start, length, jobGroup, jobId, triggerTimeStart, triggerTimeEnd, logStatus);
-		
+
+		// join
+		List<XxlJobLogView> viewList;
+		if (list != null && !list.isEmpty()) {
+			Set<Integer> jobIdSet = list.stream().map(XxlJobLog::getJobId).collect(Collectors.toSet());
+			Set<Integer> groupIdSet = list.stream().map(XxlJobLog::getJobGroup).collect(Collectors.toSet());
+			List<XxlJobInfo> jobList = xxlJobInfoDao.findAllByIdIn(jobIdSet);
+			List<XxlJobGroup> groupList = xxlJobGroupDao.findAllByIdIn(groupIdSet);
+			viewList = list.stream().map(xxlJobLog -> XxlJobLogView.of(xxlJobLog, jobList, groupList)).collect(Collectors.toList());
+		} else {
+			viewList = Collections.emptyList();
+		}
+
 		// package result
 		Map<String, Object> maps = new HashMap<String, Object>();
 	    maps.put("recordsTotal", list_count);		// 总记录数
 	    maps.put("recordsFiltered", list_count);	// 过滤后的总记录数
-	    maps.put("data", list);  					// 分页列表
+		maps.put("data", viewList);                    // 分页列表
 		return maps;
 	}
 

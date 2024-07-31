@@ -122,14 +122,14 @@ $(function () {
             },
             {
                 "data": 'triggerTime',
-                "width": '20%',
+                "width": '15%',
                 "render": function (data, type, row) {
                     return data ? moment(data).format("YYYY-MM-DD HH:mm:ss") : "";
                 }
             },
             {
                 "data": 'triggerCode',
-                "width": '5%',
+                "width": '10%',
                 "render": function (data, type, row) {
                     var html = data;
                     if (data == 200) {
@@ -151,14 +151,14 @@ $(function () {
             },
             {
                 "data": 'handleTime',
-                "width": '20%',
+                "width": '15%',
                 "render": function (data, type, row) {
                     return data ? moment(data).format("YYYY-MM-DD HH:mm:ss") : "";
                 }
             },
             {
                 "data": 'handleCode',
-                "width": '5%',
+                "width": '10%',
                 "render": function (data, type, row) {
                     var html = data;
                     if (data == 200) {

@@ -10,11 +10,9 @@
     <title>${I18n.admin_name}</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini <#if cookieMap?exists && cookieMap["xxljob_adminlte_settings"]?exists && "off" == cookieMap["xxljob_adminlte_settings"].value >sidebar-collapse</#if> ">
-<div class="wrapper">
+<div class="wrapper layout-top-nav">
 	<!-- header -->
-	<@netCommon.commonHeader />
-	<!-- left -->
-	<@netCommon.commonLeft "joblog" />
+    <@netCommon.commonHeader2 "joblog" />
 
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">

@@ -8,12 +8,10 @@
     <title>${I18n.admin_name}</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini <#if cookieMap?exists && cookieMap["xxljob_adminlte_settings"]?exists && "off" == cookieMap["xxljob_adminlte_settings"].value >sidebar-collapse</#if> ">
-<div class="wrapper">
+<div class="wrapper layout-top-nav">
 	<!-- header -->
-	<@netCommon.commonHeader />
-	<!-- left -->
-	<@netCommon.commonLeft "jobgroup" />
-	
+    <@netCommon.commonHeader2 "jobgroup" />
+
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -44,8 +42,8 @@
                     <button class="btn btn-block btn-success add" type="button">${I18n.jobinfo_field_add}</button>
                 </div>
             </div>
-			
-			<div class="row">
+
+            <div class="row">
 				<div class="col-xs-12">
 					<div class="box">
 			            <div class="box-body">
@@ -177,8 +175,8 @@
             </div>
         </div>
     </div>
-	
-	<!-- footer -->
+
+    <!-- footer -->
 	<@netCommon.commonFooter />
 </div>
 

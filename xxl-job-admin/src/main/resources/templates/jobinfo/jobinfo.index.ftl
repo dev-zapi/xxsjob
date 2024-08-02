@@ -26,7 +26,7 @@
                         </div>-->
                         <div class="box-body">
                             <div class="row" style="margin-bottom: 10px">
-                                <div class="col-xs-3">
+                                <div class="col-xs-2">
                                     <div class="input-group">
                                         <span class="input-group-addon">${I18n.jobinfo_field_jobgroup}</span>
                                         <select class="form-control" id="jobGroup">
@@ -37,8 +37,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-xs-1">
+                                <div class="col-xs-2">
                                     <div class="input-group">
+                                        <span class="input-group-addon">${I18n.system_status}</span>
                                         <select class="form-control" id="triggerStatus">
                                             <option value="-1">${I18n.system_all}</option>
                                             <option value="0">${I18n.jobinfo_opt_stop}</option>
@@ -48,18 +49,21 @@
                                 </div>
                                 <div class="col-xs-2">
                                     <div class="input-group">
+                                        <span class="input-group-addon">${I18n.jobinfo_field_jobdesc}</span>
                                         <input type="text" class="form-control" id="jobDesc"
                                                placeholder="${I18n.system_please_input}${I18n.jobinfo_field_jobdesc}">
                                     </div>
                                 </div>
                                 <div class="col-xs-2">
                                     <div class="input-group">
+                                        <span class="input-group-addon">JobHandler</span>
                                         <input type="text" class="form-control" id="executorHandler"
                                                placeholder="${I18n.system_please_input}JobHandler">
                                     </div>
                                 </div>
                                 <div class="col-xs-2">
                                     <div class="input-group">
+                                        <span class="input-group-addon">${I18n.jobinfo_field_author}</span>
                                         <input type="text" class="form-control" id="author"
                                                placeholder="${I18n.system_please_input}${I18n.jobinfo_field_author}">
                                     </div>

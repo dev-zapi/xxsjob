@@ -43,7 +43,7 @@
 								<div class="col-xs-1">
 									<button class="btn btn-block btn-info" id="searchBtn">${I18n.system_search}</button>
 								</div>
-								<div class="col-xs-2">
+								<div class="col-xs-1">
 									<button class="btn btn-block btn-success add"
 											type="button">${I18n.user_add}</button>
 								</div>

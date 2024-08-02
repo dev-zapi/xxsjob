@@ -16,71 +16,72 @@
 
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-		<!-- Content Header (Page header) -->
-		<section class="content-header">
-			<h1>${I18n.joblog_name}</h1>
-		</section>
 
         <!-- Main content -->
 	    <section class="content">
-	    	<div class="row">
-	    		<div class="col-xs-2">
- 					<div class="input-group">
-	                	<span class="input-group-addon">${I18n.jobinfo_field_jobgroup}</span>
-                		<select class="form-control" id="jobGroup"  paramVal="<#if jobInfo?exists>${jobInfo.jobGroup}</#if>" >
-                            <#if Request["XXL_JOB_LOGIN_IDENTITY"].role == 1>
-                                <option value="0" >${I18n.system_all}</option>  <#-- 仅管理员支持查询全部；普通用户仅支持查询有权限的 jobGroup -->
-                            </#if>
-                			<#list JobGroupList as group>
-                				<option value="${group.id}" >${group.title}</option>
-                			</#list>
-	                  	</select>
-	              	</div>
-	            </div>
-	            <div class="col-xs-2">
-	              	<div class="input-group">
-	                	<span class="input-group-addon">${I18n.jobinfo_job}</span>
-                        <select class="form-control" id="jobId" paramVal="<#if jobInfo?exists>${jobInfo.id}</#if>" >
-                            <option value="0" >${I18n.system_all}</option>
-						</select>
-	              	</div>
-	            </div>
 
-                <div class="col-xs-2">
-                    <div class="input-group">
-                        <span class="input-group-addon">${I18n.joblog_status}</span>
-                        <select class="form-control" id="logStatus" >
-                            <option value="-1" >${I18n.joblog_status_all}</option>
-                            <option value="1" >${I18n.joblog_status_suc}</option>
-                            <option value="2" >${I18n.joblog_status_fail}</option>
-                            <option value="3" >${I18n.joblog_status_running}</option>
-                        </select>
-                    </div>
-                </div>
 
-	            <div class="col-xs-4">
-              		<div class="input-group">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+
+                        <#--<div class="box-header hide"><h3 class="box-title">调度日志</h3></div>-->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">${I18n.jobinfo_field_jobgroup}</span>
+                                        <select class="form-control" id="jobGroup"
+                                                paramVal="<#if jobInfo?exists>${jobInfo.jobGroup}</#if>">
+                                            <#if Request["XXL_JOB_LOGIN_IDENTITY"].role == 1>
+                                                <option value="0">${I18n.system_all}</option>  <#-- 仅管理员支持查询全部；普通用户仅支持查询有权限的 jobGroup -->
+                                            </#if>
+                                            <#list JobGroupList as group>
+                                                <option value="${group.id}">${group.title}</option>
+                                            </#list>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">${I18n.jobinfo_job}</span>
+                                        <select class="form-control" id="jobId"
+                                                paramVal="<#if jobInfo?exists>${jobInfo.id}</#if>">
+                                            <option value="0">${I18n.system_all}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">${I18n.joblog_status}</span>
+                                        <select class="form-control" id="logStatus">
+                                            <option value="-1">${I18n.joblog_status_all}</option>
+                                            <option value="1">${I18n.joblog_status_suc}</option>
+                                            <option value="2">${I18n.joblog_status_fail}</option>
+                                            <option value="3">${I18n.joblog_status_running}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <div class="input-group">
                 		<span class="input-group-addon">
 	                  		${I18n.joblog_field_triggerTime}
 	                	</span>
-	                	<input type="text" class="form-control" id="filterTime" readonly >
-	              	</div>
-	            </div>
+                                        <input type="text" class="form-control" id="filterTime" readonly>
+                                    </div>
+                                </div>
 
-                <div class="col-xs-1">
-                    <button class="btn btn-block btn-info" id="searchBtn">${I18n.system_search}</button>
-                </div>
+                                <div class="col-xs-1">
+                                    <button class="btn btn-block btn-info" id="searchBtn">${I18n.system_search}</button>
+                                </div>
 
-	            <div class="col-xs-1">
-                    <button class="btn btn-block btn-default" id="clearLog">${I18n.joblog_clean}</button>
-	            </div>
-          	</div>
-
-            <div class="row">
-				<div class="col-xs-12">
-					<div class="box">
-			            <#--<div class="box-header hide"><h3 class="box-title">调度日志</h3></div>-->
-			            <div class="box-body">
+                                <div class="col-xs-1">
+                                    <button class="btn btn-block btn-default"
+                                            id="clearLog">${I18n.joblog_clean}</button>
+                                </div>
+                            </div>
 			              	<table id="joblog_list" class="table table-bordered table-striped display" width="100%" >
 				                <thead>
 					            	<tr>

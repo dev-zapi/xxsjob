@@ -14,39 +14,38 @@
 
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-		<!-- Content Header (Page header) -->
-		<section class="content-header">
-			<h1>${I18n.jobgroup_name}</h1>
-		</section>
 
 		<!-- Main content -->
 	    <section class="content">
 
-            <div class="row">
-                <div class="col-xs-3">
-                    <div class="input-group">
-                        <span class="input-group-addon">AppName</span>
-                        <input type="text" class="form-control" id="appname" placeholder="${I18n.system_please_input}AppName" >
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="input-group">
-                        <span class="input-group-addon">${I18n.jobgroup_field_title}</span>
-                        <input type="text" class="form-control" id="title" placeholder="${I18n.jobgroup_field_title}" >
-                    </div>
-                </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-block btn-info" id="searchBtn">${I18n.system_search}</button>
-                </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-block btn-success add" type="button">${I18n.jobinfo_field_add}</button>
-                </div>
-            </div>
 
             <div class="row">
-				<div class="col-xs-12">
-					<div class="box">
-			            <div class="box-body">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">AppName</span>
+                                        <input type="text" class="form-control" id="appname"
+                                               placeholder="${I18n.system_please_input}AppName">
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">${I18n.jobgroup_field_title}</span>
+                                        <input type="text" class="form-control" id="title"
+                                               placeholder="${I18n.jobgroup_field_title}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <button class="btn btn-block btn-info" id="searchBtn">${I18n.system_search}</button>
+                                </div>
+                                <div class="col-xs-2">
+                                    <button class="btn btn-block btn-success add"
+                                            type="button">${I18n.jobinfo_field_add}</button>
+                                </div>
+                            </div>
 			              	<table id="jobgroup_list" class="table table-bordered table-striped display" width="100%" >
 				                <thead>
 					            	<tr>

@@ -5,6 +5,7 @@ $(function() {
 		"deferRender": true,
 		"processing" : true,
 	    "serverSide": true,
+		sDom: 't<"row"<"col-sm-5"i><"col-sm-7"p>>',
 		"ajax": {
 			url: base_url + "/jobinfo/pageList",
 			type:"post",
@@ -139,12 +140,8 @@ $(function() {
                                 tableData['key'+row.id] = row;
 
                                 // opt
-                                var html = '<div class="btn-group">\n' +
-                                    '     <button type="button" class="btn btn-primary btn-sm">'+ I18n.system_opt +'</button>\n' +
-                                    '     <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">\n' +
-                                    '       <span class="caret"></span>\n' +
-                                    '       <span class="sr-only">Toggle Dropdown</span>\n' +
-                                    '     </button>\n' +
+								var html = '<div class="btn-group btn-block">\n' +
+									'     <button type="button" class="btn btn-primary btn-xs dropdown-toggle btn-block" data-toggle="dropdown">' + I18n.system_opt + ' <span class="caret"></span></button>\n' +
                                     '     <ul class="dropdown-menu" role="menu" _id="'+ row.id +'" >\n' +
                                     '       <li><a href="javascript:void(0);" class="job_trigger" >'+ I18n.jobinfo_opt_run +'</a></li>\n' +
                                     '       <li><a href="'+ logHref +'">'+ I18n.jobinfo_opt_log +'</a></li>\n' +

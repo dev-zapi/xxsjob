@@ -14,64 +14,64 @@
 
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-		<!-- Content Header (Page header) -->
-		<section class="content-header">
-			<h1>${I18n.jobinfo_name}</h1>
-		</section>
 
         <!-- Main content -->
 	    <section class="content">
 
             <div class="row">
-	    		<div class="col-xs-3">
-	              	<div class="input-group">
-	                	<span class="input-group-addon">${I18n.jobinfo_field_jobgroup}</span>
-                		<select class="form-control" id="jobGroup" >
-                			<#list JobGroupList as group>
-                				<option value="${group.id}" <#if jobGroup==group.id>selected</#if> >${group.title}</option>
-                			</#list>
-	                  	</select>
-	              	</div>
-	            </div>
-                <div class="col-xs-1">
-                    <div class="input-group">
-                        <select class="form-control" id="triggerStatus" >
-                            <option value="-1" >${I18n.system_all}</option>
-                            <option value="0" >${I18n.jobinfo_opt_stop}</option>
-                            <option value="1" >${I18n.jobinfo_opt_start}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xs-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="jobDesc" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_jobdesc}" >
-                    </div>
-                </div>
-                <div class="col-xs-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="executorHandler" placeholder="${I18n.system_please_input}JobHandler" >
-                    </div>
-                </div>
-                <div class="col-xs-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="author" placeholder="${I18n.system_please_input}${I18n.jobinfo_field_author}" >
-                    </div>
-                </div>
-	            <div class="col-xs-1">
-	            	<button class="btn btn-block btn-info" id="searchBtn">${I18n.system_search}</button>
-	            </div>
-	            <div class="col-xs-1">
-	            	<button class="btn btn-block btn-success add" type="button">${I18n.jobinfo_field_add}</button>
-	            </div>
-          	</div>
-
-            <div class="row">
-				<div class="col-xs-12">
-					<div class="box">
-			            <#--<div class="box-header hide">
-			            	<h3 class="box-title">调度列表</h3>
-			            </div>-->
-			            <div class="box-body" >
+                <div class="col-xs-12">
+                    <div class="box">
+                        <#--<div class="box-header hide">
+                            <h3 class="box-title">调度列表</h3>
+                        </div>-->
+                        <div class="box-body">
+                            <div class="row" style="margin-bottom: 10px">
+                                <div class="col-xs-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">${I18n.jobinfo_field_jobgroup}</span>
+                                        <select class="form-control" id="jobGroup">
+                                            <#list JobGroupList as group>
+                                                <option value="${group.id}"
+                                                        <#if jobGroup==group.id>selected</#if> >${group.title}</option>
+                                            </#list>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-1">
+                                    <div class="input-group">
+                                        <select class="form-control" id="triggerStatus">
+                                            <option value="-1">${I18n.system_all}</option>
+                                            <option value="0">${I18n.jobinfo_opt_stop}</option>
+                                            <option value="1">${I18n.jobinfo_opt_start}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="jobDesc"
+                                               placeholder="${I18n.system_please_input}${I18n.jobinfo_field_jobdesc}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="executorHandler"
+                                               placeholder="${I18n.system_please_input}JobHandler">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="author"
+                                               placeholder="${I18n.system_please_input}${I18n.jobinfo_field_author}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-1">
+                                    <button class="btn btn-block btn-info" id="searchBtn">${I18n.system_search}</button>
+                                </div>
+                                <div class="col-xs-1">
+                                    <button class="btn btn-block btn-success add"
+                                            type="button">${I18n.jobinfo_field_add}</button>
+                                </div>
+                            </div>
 			              	<table id="job_list" class="table table-bordered table-striped" width="100%" >
 				                <thead>
 					            	<tr>

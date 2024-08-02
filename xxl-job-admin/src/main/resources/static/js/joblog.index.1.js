@@ -74,6 +74,7 @@ $(function () {
         "deferRender": true,
         "processing": true,
         "serverSide": true,
+        sDom: 't<"row"<"col-sm-5"i><"col-sm-7"p>>',
         "ajax": {
             url: base_url + "/joblog/pageList",
             type: "post",
@@ -201,12 +202,8 @@ $(function () {
                                     '       <li><a href="javascript:void(0);" class="logKill" _id="' + row.id + '" >' + I18n.joblog_kill_log + '</a></li>\n';
                             }
 
-                            var html = '<div class="btn-group">\n' +
-                                '     <button type="button" class="btn btn-primary btn-sm">' + I18n.system_opt + '</button>\n' +
-                                '     <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">\n' +
-                                '       <span class="caret"></span>\n' +
-                                '       <span class="sr-only">Toggle Dropdown</span>\n' +
-                                '     </button>\n' +
+                            var html = '<div class="btn-group btn-block">\n' +
+                                '     <button type="button" class="btn btn-primary btn-xs dropdown-toggle btn-block" data-toggle="dropdown">' + I18n.system_opt + ' <span class="caret"></span></button>\n' +
                                 '     <ul class="dropdown-menu" role="menu" _id="' + row.id + '" >\n' +
                                 '       <li><a href="javascript:void(0);" class="logDetail" _id="' + row.id + '" >' + I18n.joblog_rolling_log + '</a></li>\n' +
                                 logKillDiv +

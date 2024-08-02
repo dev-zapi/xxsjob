@@ -3,8 +3,9 @@ $(function() {
 	// init date tables
 	var userListTable = $("#user_list").dataTable({
 		"deferRender": true,
-		"processing" : true, 
+		"processing": true,
 	    "serverSide": true,
+		sDom: 't<"row"<"col-sm-5"i><"col-sm-7"p>>',
 		"ajax": {
 			url: base_url + "/user/pageList",
 			type:"post",
@@ -63,10 +64,10 @@ $(function() {
 	                		return function(){
 								// html
                                 tableData['key'+row.id] = row;
-								var html = '<p id="'+ row.id +'" >'+
+								var html = '<div class="opt" id="' + row.id + '" >' +
 									'<button class="btn btn-warning btn-xs update" type="button">'+ I18n.system_opt_edit +'</button>  '+
 									'<button class="btn btn-danger btn-xs delete" type="button">'+ I18n.system_opt_del +'</button>  '+
-									'</p>';
+									'</div>';
 
 	                			return html;
 							};
@@ -106,10 +107,10 @@ $(function() {
 	$('#searchBtn').on('click', function(){
         userListTable.fnDraw();
 	});
-	
+
 	// job operate
 	$("#user_list").on('click', '.delete',function() {
-		var id = $(this).parent('p').attr("id");
+		var id = $(this).parent('div.opt').attr("id");
 
 		layer.confirm( I18n.system_ok + I18n.system_opt_del + '?', {
 			icon: 3,
@@ -159,9 +160,9 @@ $(function() {
 		$('#addModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
 	var addModalValidate = $("#addModal .form").validate({
-		errorElement : 'span',  
+		errorElement: 'span',
         errorClass : 'help-block',
-        focusInvalid : true,  
+		focusInvalid: true,
         rules : {
             username : {
 				required : true,
@@ -172,7 +173,7 @@ $(function() {
                 required : true,
                 rangelength:[4, 20]
             }
-        }, 
+		},
         messages : {
             username : {
             	required : I18n.system_please_input + I18n.user_username,
@@ -183,15 +184,15 @@ $(function() {
                 rangelength: I18n.system_lengh_limit + "[4-20]"
             }
         },
-		highlight : function(element) {  
-            $(element).closest('.form-group').addClass('has-error');  
+		highlight: function (element) {
+			$(element).closest('.form-group').addClass('has-error');
         },
-        success : function(label) {  
-            label.closest('.form-group').removeClass('has-error');  
-            label.remove();  
+		success: function (label) {
+			label.closest('.form-group').removeClass('has-error');
+			label.remove();
         },
-        errorPlacement : function(error, element) {  
-            element.parent('div').append(error);  
+		errorPlacement: function (error, element) {
+			element.parent('div').append(error);
         },
         submitHandler : function(form) {
 
@@ -271,18 +272,18 @@ $(function() {
 		$('#updateModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
 	var updateModalValidate = $("#updateModal .form").validate({
-		errorElement : 'span',  
+		errorElement: 'span',
         errorClass : 'help-block',
         focusInvalid : true,
 		highlight : function(element) {
-            $(element).closest('.form-group').addClass('has-error');  
+			$(element).closest('.form-group').addClass('has-error');
         },
-        success : function(label) {  
-            label.closest('.form-group').removeClass('has-error');  
-            label.remove();  
+		success: function (label) {
+			label.closest('.form-group').removeClass('has-error');
+			label.remove();
         },
-        errorPlacement : function(error, element) {  
-            element.parent('div').append(error);  
+		errorPlacement: function (error, element) {
+			element.parent('div').append(error);
         },
         submitHandler : function(form) {
 

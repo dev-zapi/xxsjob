@@ -14,44 +14,42 @@
 
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-		<!-- Content Header (Page header) -->
-		<section class="content-header">
-			<h1>${I18n.user_manage}</h1>
-		</section>
 
 		<!-- Main content -->
 	    <section class="content">
 
-			<div class="row">
-                <div class="col-xs-3">
-                    <div class="input-group">
-                        <span class="input-group-addon">${I18n.user_role}</span>
-                        <select class="form-control" id="role" >
-                            <option value="-1" >${I18n.system_all}</option>
-                            <option value="1" >${I18n.user_role_admin}</option>
-                            <option value="0" >${I18n.user_role_normal}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="input-group">
-                        <span class="input-group-addon">${I18n.user_username}</span>
-                        <input type="text" class="form-control" id="username" autocomplete="on" >
-                    </div>
-                </div>
-	            <div class="col-xs-1">
-	            	<button class="btn btn-block btn-info" id="searchBtn">${I18n.system_search}</button>
-	            </div>
-	            <div class="col-xs-2">
-	            	<button class="btn btn-block btn-success add" type="button">${I18n.user_add}</button>
-	            </div>
-          	</div>
 
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="box">
-			            <div class="box-body" >
-			              	<table id="user_list" class="table table-bordered table-striped" width="100%" >
+						<div class="box-body">
+							<div class="row">
+								<div class="col-xs-3">
+									<div class="input-group">
+										<span class="input-group-addon">${I18n.user_role}</span>
+										<select class="form-control" id="role">
+											<option value="-1">${I18n.system_all}</option>
+											<option value="1">${I18n.user_role_admin}</option>
+											<option value="0">${I18n.user_role_normal}</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-xs-3">
+									<div class="input-group">
+										<span class="input-group-addon">${I18n.user_username}</span>
+										<input type="text" class="form-control" id="username" autocomplete="on">
+									</div>
+								</div>
+								<div class="col-xs-1">
+									<button class="btn btn-block btn-info" id="searchBtn">${I18n.system_search}</button>
+								</div>
+								<div class="col-xs-2">
+									<button class="btn btn-block btn-success add"
+											type="button">${I18n.user_add}</button>
+								</div>
+							</div>
+
+							<table id="user_list" class="table table-bordered table-striped" width="100%">
 				                <thead>
 					            	<tr>
                                         <th name="id" >ID</th>

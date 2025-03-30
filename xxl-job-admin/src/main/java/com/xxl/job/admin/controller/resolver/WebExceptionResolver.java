@@ -1,5 +1,6 @@
 package com.xxl.job.admin.controller.resolver;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xxl.job.admin.core.exception.XxlJobException;
 import com.xxl.job.core.biz.model.ReturnT;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 
 /**
  * common exception resolver
@@ -22,6 +24,16 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 @Slf4j
 class WebExceptionResolver implements HandlerExceptionResolver {
+
+	public static final MappingJackson2JsonView VIEW;
+
+	static {
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX"));
+		VIEW = new MappingJackson2JsonView();
+		VIEW.setExtractValueFromSingleKeyModel(true);
+		VIEW.setObjectMapper(objectMapper);
+	}
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
@@ -51,9 +63,7 @@ class WebExceptionResolver implements HandlerExceptionResolver {
 		// response
 		ModelAndView mv = new ModelAndView();
 		if (isJson) {
-			MappingJackson2JsonView view = new MappingJackson2JsonView();
-			view.setExtractValueFromSingleKeyModel(true);
-			mv.setView(view);
+			mv.setView(VIEW);
 			mv.addObject("result", errorResult);
 		} else {
 			mv.addObject("exceptionMsg", errorResult.getMsg());

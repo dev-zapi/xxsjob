@@ -21,17 +21,17 @@ import java.io.IOException;
  */
 @Component
 @Slf4j
-public class WebExceptionResolver implements HandlerExceptionResolver {
+class WebExceptionResolver implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
 
 		if (!(ex instanceof XxlJobException)) {
-			log.error("WebExceptionResolver", ex);
+			log.error("Handler thrown exception, handler={}", handler, ex);
 		}
 
-		// if json
+		// if JSON
 		boolean isJson = false;
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod method = (HandlerMethod)handler;
@@ -42,7 +42,7 @@ public class WebExceptionResolver implements HandlerExceptionResolver {
 		}
 
 		// error result
-		ReturnT<String> errorResult = new ReturnT<String>(ReturnT.FAIL_CODE, ex.toString().replaceAll("\n", "<br/>"));
+		ReturnT<String> errorResult = new ReturnT<>(ReturnT.FAIL_CODE, ex.toString().replaceAll("\n", "<br/>"));
 
 		// response
 		ModelAndView mv = new ModelAndView();
@@ -53,13 +53,11 @@ public class WebExceptionResolver implements HandlerExceptionResolver {
 			} catch (IOException e) {
 				log.error(e.getMessage(), e);
 			}
-			return mv;
 		} else {
-
 			mv.addObject("exceptionMsg", errorResult.getMsg());
 			mv.setViewName("/common/common.exception");
-			return mv;
 		}
+		return mv;
 	}
 
 }

@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.math.BigInteger;
 
 /**
+ * 登录服务类，负责用户的登录、登出及登录状态验证。
+ *
  * @author xuxueli 2019-05-04 22:13:264
  */
 @Configuration
@@ -25,13 +27,12 @@ public class LoginService {
     @Resource
     private XxlJobUserDao xxlJobUserDao;
 
-
-    private String makeToken(XxlJobUser xxlJobUser){
+    private String makeToken(XxlJobUser xxlJobUser) {
         String tokenJson = JacksonUtil.writeValueAsString(xxlJobUser);
-        String tokenHex = new BigInteger(tokenJson.getBytes()).toString(16);
-        return tokenHex;
+        return new BigInteger(tokenJson.getBytes()).toString(16);
     }
-    private XxlJobUser parseToken(String tokenHex){
+
+    private XxlJobUser parseToken(String tokenHex) {
         XxlJobUser xxlJobUser = null;
         if (tokenHex != null) {
             String tokenJson = new String(new BigInteger(tokenHex, 16).toByteArray());      // username_password(md5)
@@ -40,22 +41,31 @@ public class LoginService {
         return xxlJobUser;
     }
 
-
-    public ReturnT<String> login(HttpServletRequest request, HttpServletResponse response, String username, String password, boolean ifRemember){
+    /**
+     * 用户登录方法。
+     *
+     * @param request    HTTP请求对象
+     * @param response   HTTP响应对象
+     * @param username   用户名
+     * @param password   密码
+     * @param ifRemember 是否记住登录状态
+     * @return 登录结果
+     */
+    public ReturnT<String> login(HttpServletRequest request, HttpServletResponse response, String username, String password, boolean ifRemember) {
 
         // param
-        if (username==null || username.trim().length()==0 || password==null || password.trim().length()==0){
-            return new ReturnT<String>(500, I18nUtil.getString("login_param_empty"));
+        if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+            return new ReturnT<>(500, I18nUtil.getString("login_param_empty"));
         }
 
         // valid passowrd
         XxlJobUser xxlJobUser = xxlJobUserDao.loadByUserName(username);
         if (xxlJobUser == null) {
-            return new ReturnT<String>(500, I18nUtil.getString("login_param_unvalid"));
+            return new ReturnT<>(500, I18nUtil.getString("login_param_unvalid"));
         }
         String passwordMd5 = DigestUtils.md5DigestAsHex(password.getBytes());
         if (!passwordMd5.equals(xxlJobUser.getPassword())) {
-            return new ReturnT<String>(500, I18nUtil.getString("login_param_unvalid"));
+            return new ReturnT<>(500, I18nUtil.getString("login_param_unvalid"));
         }
 
         String loginToken = makeToken(xxlJobUser);
@@ -66,23 +76,25 @@ public class LoginService {
     }
 
     /**
-     * logout
+     * 用户登出方法。
      *
-     * @param request
-     * @param response
+     * @param request  HTTP请求对象
+     * @param response HTTP响应对象
+     * @return 登出结果
      */
-    public ReturnT<String> logout(HttpServletRequest request, HttpServletResponse response){
+    public ReturnT<String> logout(HttpServletRequest request, HttpServletResponse response) {
         CookieUtil.remove(request, response, LOGIN_IDENTITY_KEY);
         return ReturnT.SUCCESS;
     }
 
     /**
-     * logout
+     * 验证用户是否已登录。
      *
-     * @param request
-     * @return
+     * @param request  HTTP请求对象
+     * @param response HTTP响应对象
+     * @return 登录用户信息，如果未登录则返回null
      */
-    public XxlJobUser ifLogin(HttpServletRequest request, HttpServletResponse response){
+    public XxlJobUser ifLogin(HttpServletRequest request, HttpServletResponse response) {
         String cookieToken = CookieUtil.getValue(request, LOGIN_IDENTITY_KEY);
         if (cookieToken != null) {
             XxlJobUser cookieUser = null;
@@ -102,6 +114,4 @@ public class LoginService {
         }
         return null;
     }
-
-
 }

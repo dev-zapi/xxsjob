@@ -10,7 +10,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a><b>XXL</b>JOB</a>
+        <a><b>XXS</b>JOB</a>
     </div>
     <form id="loginForm" method="post">
         <div class="login-box-body">

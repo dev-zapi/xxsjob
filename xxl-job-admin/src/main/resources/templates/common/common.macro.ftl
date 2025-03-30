@@ -16,6 +16,8 @@
     <![endif]-->
     <link rel="stylesheet"
           href="${request.contextPath}/static/adminlte/bower_components/PACE/themes/blue/pace-theme-flash.css">
+    <link rel="stylesheet"
+          href="${request.contextPath}/static/css/custom.css">
     <#global I18n = I18nUtil.getMultString()?eval />
 </#macro>
 
@@ -53,7 +55,7 @@
 <#macro commonHeader>
     <header class="main-header">
         <a href="${request.contextPath}/" class="logo">
-            <span class="logo-mini"><b>XXL</b></span>
+            <span class="logo-mini"><b>XXS</b></span>
             <span class="logo-lg"><b>${I18n.admin_name}</b></span>
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
@@ -91,19 +93,21 @@
     <header class="main-header">
         <nav class="navbar navbar-static-top" role="navigation">
             <ul class="nav navbar-nav">
-                <li class="nav-click <#if pageName == "index">active</#if>"><a href="${request.contextPath}/"><i
-                                class="fa fa-circle-o text-aqua"></i><span>${I18n.job_dashboard_name}</span></a></li>
+                <li class="nav-click first-nav-item <#if pageName == "index">active</#if>"><a
+                            href="${request.contextPath}/">
+                        <b>XXS</b>JOB
+                    </a></li>
                 <li class="nav-click <#if pageName == "jobinfo">active</#if>"><a
                             href="${request.contextPath}/jobinfo"><i
-                                class="fa fa-circle-o text-yellow"></i><span>${I18n.jobinfo_name}</span></a></li>
+                                class="fa fa-calendar"></i> <span>${I18n.jobinfo_name}</span></a></li>
                 <li class="nav-click <#if pageName == "joblog">active</#if>"><a href="${request.contextPath}/joblog"><i
-                                class="fa fa-circle-o text-green"></i><span>${I18n.joblog_name}</span></a></li>
+                                class="fa fa-file"></i> <span>${I18n.joblog_name}</span></a></li>
                 <#if Request["XXL_JOB_LOGIN_IDENTITY"].role == 1>
                     <li class="nav-click <#if pageName == "jobgroup">active</#if>"><a
                                 href="${request.contextPath}/jobgroup"><i
-                                    class="fa fa-circle-o text-red"></i><span>${I18n.jobgroup_name}</span></a></li>
+                                    class="fa fa-gears"></i> <span>${I18n.jobgroup_name}</span></a></li>
                     <li class="nav-click <#if pageName == "user">active</#if>"><a href="${request.contextPath}/user"><i
-                                    class="fa fa-circle-o text-purple"></i><span>${I18n.user_manage}</span></a></li>
+                                    class="fa fa-users"></i> <span>${I18n.user_manage}</span></a></li>
                 </#if>
             </ul>
             <div class="navbar-custom-menu">

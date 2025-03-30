@@ -1,18 +1,18 @@
 package com.xxl.job.admin.controller.resolver;
 
 import com.xxl.job.admin.core.exception.XxlJobException;
-import com.xxl.job.admin.core.util.JacksonUtil;
 import com.xxl.job.core.biz.model.ReturnT;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * common exception resolver
@@ -35,9 +35,13 @@ class WebExceptionResolver implements HandlerExceptionResolver {
 		boolean isJson = false;
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod method = (HandlerMethod)handler;
-			ResponseBody responseBody = method.getMethodAnnotation(ResponseBody.class);
-			if (responseBody != null) {
+			if (method.getMethodAnnotation(ResponseBody.class) != null) {
 				isJson = true;
+			} else {
+				Class<?> beanType = method.getBeanType();
+				if (beanType.isAnnotationPresent(ResponseBody.class) || beanType.isAnnotationPresent(RestController.class)) {
+					isJson = true;
+				}
 			}
 		}
 
@@ -47,12 +51,10 @@ class WebExceptionResolver implements HandlerExceptionResolver {
 		// response
 		ModelAndView mv = new ModelAndView();
 		if (isJson) {
-			try {
-				response.setContentType("application/json;charset=utf-8");
-				response.getWriter().print(JacksonUtil.writeValueAsString(errorResult));
-			} catch (IOException e) {
-				log.error(e.getMessage(), e);
-			}
+			MappingJackson2JsonView view = new MappingJackson2JsonView();
+			view.setExtractValueFromSingleKeyModel(true);
+			mv.setView(view);
+			mv.addObject("result", errorResult);
 		} else {
 			mv.addObject("exceptionMsg", errorResult.getMsg());
 			mv.setViewName("/common/common.exception");

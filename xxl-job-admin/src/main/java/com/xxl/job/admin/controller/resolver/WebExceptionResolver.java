@@ -1,10 +1,9 @@
 package com.xxl.job.admin.controller.resolver;
 
 import com.xxl.job.admin.core.exception.XxlJobException;
-import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.admin.core.util.JacksonUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.xxl.job.core.biz.model.ReturnT;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
@@ -21,15 +20,15 @@ import java.io.IOException;
  * @author xuxueli 2016-1-6 19:22:18
  */
 @Component
+@Slf4j
 public class WebExceptionResolver implements HandlerExceptionResolver {
-	private static transient Logger logger = LoggerFactory.getLogger(WebExceptionResolver.class);
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
 
 		if (!(ex instanceof XxlJobException)) {
-			logger.error("WebExceptionResolver:{}", ex);
+			log.error("WebExceptionResolver", ex);
 		}
 
 		// if json
@@ -52,7 +51,7 @@ public class WebExceptionResolver implements HandlerExceptionResolver {
 				response.setContentType("application/json;charset=utf-8");
 				response.getWriter().print(JacksonUtil.writeValueAsString(errorResult));
 			} catch (IOException e) {
-				logger.error(e.getMessage(), e);
+				log.error(e.getMessage(), e);
 			}
 			return mv;
 		} else {
@@ -62,5 +61,5 @@ public class WebExceptionResolver implements HandlerExceptionResolver {
 			return mv;
 		}
 	}
-	
+
 }

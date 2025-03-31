@@ -245,7 +245,7 @@ $(function () {
   // update
   $("#user_list").on('click', '.update', function () {
 
-    var id = $(this).parent('p').attr("id");
+    var id = this.parentElement.id
     var row = tableData['key' + id];
 
     // base data
@@ -283,12 +283,10 @@ $(function () {
       element.parent('div').append(error);
     },
     submitHandler: function (form) {
-
       var permissionArr = [];
       $("#updateModal .form input[name=permission]:checked").each(function () {
         permissionArr.push($(this).val());
       });
-
       var paramData = {
         "id": $("#updateModal .form input[name=id]").val(),
         "username": $("#updateModal .form input[name=username]").val(),
@@ -296,11 +294,9 @@ $(function () {
         "role": $("#updateModal .form input[name=role]:checked").val(),
         "permission": permissionArr.join(',')
       };
-
       $.post(base_url + "/user/update", paramData, function (data, status) {
         if (data.code == "200") {
           $('#updateModal').modal('hide');
-
           layer.msg(I18n.system_update_suc);
           userListTable.fnDraw();
         } else {
@@ -319,8 +315,6 @@ $(function () {
     updateModalValidate.resetForm();
     $("#updateModal .form .form-group").removeClass("has-error");
     $(".remote_panel").show();	// remote
-
     $("#updateModal .form input[name=permission]").parents('.form-group').show();
   });
-
 });

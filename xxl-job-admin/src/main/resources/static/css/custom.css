@@ -1,10 +1,22 @@
 .layout-top-nav .main-header .navbar {
     margin-left: 150px;
 }
+
 .skin-blue .main-header .navbar,
 .skin-blue .main-header .logo {
     background-color: #055f93;
 }
+
 .main-header .logo {
     width: 150px;
+}
+
+table.table-bordered.dataTable tbody td {
+    vertical-align: middle;
+}
+
+label.required:after {
+    content: '*';
+    color: red;
+    padding-left: 3px;
 }

@@ -22,34 +22,20 @@
 </#macro>
 
 <#macro commonScript>
-    <!-- jQuery -->
     <script src="${request.contextPath}/static/adminlte/bower_components/jquery/jquery.min.js"></script>
-    <!-- Bootstrap -->
     <script src="${request.contextPath}/static/adminlte/bower_components/bootstrap/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
     <script src="${request.contextPath}/static/adminlte/bower_components/fastclick/fastclick.js"></script>
-    <!-- AdminLTE App -->
     <script src="${request.contextPath}/static/adminlte/dist/js/adminlte.min.js"></script>
-    <!-- jquery.slimscroll -->
     <script src="${request.contextPath}/static/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-
-    <!-- pace -->
     <script src="${request.contextPath}/static/adminlte/bower_components/PACE/pace.min.js"></script>
-<#-- jquery cookie -->
     <script src="${request.contextPath}/static/plugins/jquery/jquery.cookie.js"></script>
-<#-- jquery.validate -->
     <script src="${request.contextPath}/static/plugins/jquery/jquery.validate.min.js"></script>
-
-<#-- layer -->
     <script src="${request.contextPath}/static/plugins/layer/layer.js"></script>
-
-<#-- common -->
     <script src="${request.contextPath}/static/js/common.1.js"></script>
     <script>
         var base_url = '${request.contextPath}';
         var I18n = ${I18nUtil.getMultString()};
     </script>
-
 </#macro>
 
 <#macro commonHeader>
@@ -91,12 +77,13 @@
 
 <#macro commonHeader2 pageName>
     <header class="main-header">
+        <a href="/xxl-job-admin/" class="logo">
+            <span class="logo-lg"><b>Xxs</b>JOB</span>
+        </a>
         <nav class="navbar navbar-static-top" role="navigation">
             <ul class="nav navbar-nav">
-                <li class="nav-click first-nav-item <#if pageName == "index">active</#if>"><a
-                            href="${request.contextPath}/">
-                        <b>XXS</b>JOB
-                    </a></li>
+                <li class="nav-click <#if pageName == "index">active</#if>"><a href="${request.contextPath}/"><i
+                                class="fa fa-dashboard"></i> <span>${I18n.job_dashboard_name}</span></a></li>
                 <li class="nav-click <#if pageName == "jobinfo">active</#if>"><a
                             href="${request.contextPath}/jobinfo"><i
                                 class="fa fa-calendar"></i> <span>${I18n.jobinfo_name}</span></a></li>

@@ -28,3 +28,11 @@ label.required:after {
 .modal-footer .btn.btn-default {
     min-width: 100px;
 }
+
+select {
+    appearance: none;
+    background-image: url(https://www.svgrepo.com/show/80156/down-arrow.svg) !important;
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+    background-position: calc(100% - 12px)
+}

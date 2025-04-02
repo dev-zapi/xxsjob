@@ -20,3 +20,11 @@ label.required:after {
     color: red;
     padding-left: 3px;
 }
+
+.modal-footer .btn.btn-primary {
+    min-width: 150px;
+}
+
+.modal-footer .btn.btn-default {
+    min-width: 100px;
+}
